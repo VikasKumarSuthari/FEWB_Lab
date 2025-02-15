@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Table with Image Upload</title>
+  <style>
+    /* Basic CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4); /* Black with opacity */
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto; /* Center the modal */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      position: relative;
+    }
+    .close {
+      color: #aaa;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .uploaded-img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Table with Image Upload</h1>
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>Serial No</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Profile Link</th>
+        <th>Upload Image</th>
+        <th>Uploaded Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Dynamic rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <!-- Modal for Image Upload -->
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>Upload JPEG Image</h3>
+      <input type="file" id="imageInput" accept="image/jpeg">
+      <br><br>
+      <button id="submitImageBtn">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    // Array of student objects
+    const students = [
+      {
+        name: "Krishna",
+        address: "143/01  RadhaKrishna colony, Dwaraka",
+        phone: "123-456-7890",
+        profile: "https://example.com/Krishna"
+      },
+      {
+        name: "Radha",
+        address: "Vrindhavan",
+        phone: "987-654-3210",
+        profile: "https://example.com/Radha"
+      }
+    ];
+
+    // Global variable to store the current student's index for image upload
+    let currentStudentIndex = null;
+
+    // Function to populate the student table dynamically
+    function populateTable() {
+      const tableBody = document.querySelector('#studentTable tbody');
+      tableBody.innerHTML = ""; // Clear existing rows if any
+
+      students.forEach((student, index) => {
+        const row = document.createElement('tr');
+
+        // Serial No
+        const serialCell = document.createElement('td');
+        serialCell.textContent = index + 1;
+        row.appendChild(serialCell);
+
+        // Name
+        const nameCell = document.createElement('td');
+        nameCell.textContent = student.name;
+        row.appendChild(nameCell);
+
+        // Address
+        const addressCell = document.createElement('td');
+        addressCell.textContent = student.address;
+        row.appendChild(addressCell);
+
+        // Phone Number
+        const phoneCell = document.createElement('td');
+        phoneCell.textContent = student.phone;
+        row.appendChild(phoneCell);
+
+        // Profile Link
+        const profileCell = document.createElement('td');
+        const link = document.createElement('a');
+        link.href = student.profile;
+        link.textContent = "Profile";
+        link.target = "_blank";
+        profileCell.appendChild(link);
+        row.appendChild(profileCell);
+
+        // Upload Image Button
+        const uploadCell = document.createElement('td');
+        const uploadBtn = document.createElement('button');
+        uploadBtn.textContent = "Upload Image";
+        uploadBtn.addEventListener('click', () => openModal(index));
+        uploadCell.appendChild(uploadBtn);
+        row.appendChild(uploadCell);
+
+        // Uploaded Image cell
+        const uploadedCell = document.createElement('td');
+        uploadedCell.setAttribute('id', `uploadedImage-${index}`);
+        row.appendChild(uploadedCell);
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Function to open the modal
+    function openModal(studentIndex) {
+      currentStudentIndex = studentIndex;
+      document.getElementById('imageInput').value = ""; // Clear any previous file
+      document.getElementById('imageModal').style.display = "block";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById('imageModal').style.display = "none";
+    }
+
+    // Function to handle image submission and display
+    function submitImage() {
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select a file.");
+        return;
+      }
+
+      // Validate file type (only JPEG)
+      if (file.type !== "image/jpeg") {
+        alert("Only JPEG images are allowed.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Create an image element to display the uploaded image
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.classList.add('uploaded-img');
+
+        // Display the image in the corresponding cell
+        const imageCell = document.getElementById(`uploadedImage-${currentStudentIndex}`);
+        imageCell.innerHTML = "";
+        imageCell.appendChild(img);
+
+        // Close the modal after a successful upload
+        closeModal();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Event listeners
+    document.getElementById('submitImageBtn').addEventListener('click', submitImage);
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+
+    // Close modal when clicking outside of the modal content
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('imageModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Populate the table on page load
+    window.onload = populateTable;
+  </script>
+</body>
+</html>
