@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swad India - Authentic Indian Flavors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Global Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      background-color: #faf9f7;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    #restaurant-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+      color: #2c3e50;
+      padding: 40px 0;
+      letter-spacing: 4px;
+    }
+    
+    /* Navigation */
+    .nav-menu {
+      /* Indian-inspired warm colors: deep red to saffron */
+      background: linear-gradient(to right, #8B0000, #FF8C00);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .nav-menu .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-left, .nav-right {
+      display: flex;
+      gap: 30px;
+    }
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+    }
+    .nav-menu a:hover {
+      background-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    
+    /* Slider Styles */
+    .slider {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .slider .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slider .slide.active {
+      opacity: 1;
+    }
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Menu Table */
+    .menu-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 30px 0;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .menu-table th, 
+    .menu-table td {
+      padding: 20px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .menu-table th {
+      /* Using the same Indian-inspired gradient */
+      background: linear-gradient(to right, #8B0000, #FF8C00);
+      color: white;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .menu-table tr:last-child td {
+      border-bottom: none;
+    }
+    .menu-table tr:hover td {
+      background-color: #f8f9fa;
+      transform: scale(1.01);
+      transition: all 0.3s ease;
+    }
+    
+    /* List Styles */
+    .specialties {
+      padding: 40px 0;
+    }
+    .specialties h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #2c3e50;
+    }
+    ul, ol {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px 40px;
+    }
+    ul {
+      list-style-type: square;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    ol {
+      list-style-type: upper-roman;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    li {
+      padding: 15px 10px;
+      border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    li:hover {
+      transform: translateX(10px);
+      color: #FF8C00;
+    }
+    
+    /* Menu Card Effect */
+    .menu-section {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.1);
+      padding: 40px;
+      margin: 40px 0;
+      transition: all 0.3s ease;
+    }
+    .menu-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #2c3e50;
+    }
+    
+    /* Today's Specials Cards */
+    .special-items {
+      padding: 40px 0;
+      text-align: center;
+    }
+    .special-items h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+    .cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      flex: 1;
+      min-width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #555;
+    }
+    
+    /* Footer */
+    .footer {
+      /* Using the same Indian-inspired colors */
+      background: linear-gradient(to right, #8B0000, #FF8C00);
+      color: #070606;
+      padding: 40px 0 20px;
+      margin-top: auto;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+    .footer-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .footer-nav {
+      list-style: square;
+      padding-left: 20px;
+    }
+    .footer-nav li {
+      margin-bottom: 10px;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+    .footer-nav li:hover {
+      transform: translateX(5px);
+      color: #fff;
+    }
+    .footer-nav a {
+      color: #ecf0f1;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-nav a:hover {
+      color: #FF8C00;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+    <header style="display: flex; justify-content: center; align-items: center;">
+        <img src="https://see.fontimg.com/api/rf5/BXew/MDExYmNmNmUwMWFiNDIxMThmODFlZWQ4MTU5N2YxOTQudHRm/U3dhZCBJbmRpYQ/samarkan-oblique.png?r=fs&h=102&w=2000&fg=000000&bg=FFFFFF&tb=1&s=51" alt="logo">
+    </header>
+    
+
+  <nav class="nav-menu">
+    <div class="container">
+      <div class="nav-left">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact Us</a>
+        <a href="https://maps.google.com" target="_blank">Location</a>
+      </div>
+      <div class="nav-right">
+        <a href="#signup">Sign Up</a>
+        <a href="#login">Login</a>
+        <a href="#cart">Cart</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Slider Section with Indian-inspired placeholder images -->
+  <div class="slider">
+    <div class="slide active">
+      <img src="https://imgs.search.brave.com/P3ASwDIQyumPt8OBy1YJE3f91ZOEcPZ9KYP9o8Q6OiI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA2Lzg1LzQwLzcw/LzM2MF9GXzY4NTQw/NzAyMF9peEJZZ3ps/akhNOGhnSkZnb0ps/N0tucGh4SHFDSXIz/Zy5qcGc" alt="Indian Cuisine 1">
+    </div>
+    <div class="slide">
+      <img src="https://imgs.search.brave.com/-ESk9hDhyposhUwrvpk6H0N01r_72TnIRp1kzEGcZ8k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA3LzEyLzg4LzQ1/LzM2MF9GXzcxMjg4/NDU2MF9ZbzhFQmRj/b0FBcFNGS3ZJanQ1/Wk1vYXhoUEZVTXlP/aC5qcGc" alt="Indian Cuisine 2">
+    </div>
+    <div class="slide">
+      <img src="https://imgs.search.brave.com/eOwSJ-IrDV26d71dMLkNu24j1qH8WnvA4KHzcLtxzGs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA2LzkzLzI0Lzk1/LzM2MF9GXzY5MzI0/OTUyNl96ZmszYmFx/TG9BbWtYUE5Wd3NQ/Z0piR1pIRjNMMWlO/UC5qcGc" alt="Indian Cuisine 3">
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Specialties Section -->
+    <section class="menu-section specialties">
+      <h2>Our Specialties</h2>
+      <!-- Unordered List: Indian specialties -->
+      <ul>
+        <li>North Indian</li>
+        <li>South Indian</li>
+        <li>Mughlai</li>
+        <li>Bengali</li>
+        <li>Gujarati</li>
+      </ul>
+
+      <!-- Ordered List: Featured Indian Dishes -->
+      <h2>Featured Dishes</h2>
+      <ol>
+        <li>Butter Chicken</li>
+        <li>Paneer Tikka</li>
+        <li>Biryani</li>
+        <li>Dal Makhani</li>
+        <li>Gulab Jamun</li>
+      </ol>
+    </section>
+
+    <!-- À La Carte Table with Indian Dishes -->
+    <section class="menu-section">
+      <h2 class="section-title">Menu</h2>
+      <table class="menu-table">
+        <tr>
+          <th>Dish Name</th>
+          <th>Price</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>Butter Chicken</td>
+          <td>$25</td>
+          <td>Creamy tomato-based curry with tender chicken pieces.</td>
+        </tr>
+        <tr>
+          <td>Paneer Tikka</td>
+          <td>$20</td>
+          <td>Grilled cottage cheese marinated in spices and herbs.</td>
+        </tr>
+        <tr>
+          <td>Biryani</td>
+          <td>$22</td>
+          <td>Aromatic rice layered with tender meat and a blend of spices.</td>
+        </tr>
+      </table>
+    </section>
+        
+    <!-- Today's Specials Cards -->
+    <section class="special-items">
+      <h2>Today's Specials</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="https://imgs.search.brave.com/M9_HXkhL8KHwUs5SMw9cC3dQwA_rWoDxbcIYqwgmY2Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvYmVh/dXRpZnVsLXByZXNl/bnRhdGlvbi1vZi1i/dXR0ZXItY2hpY2tl/bi1kaXNoLWxxdWdi/cjFpYmdsbGlvbTQu/anBn" alt="Butter Chicken">
+          <h3>Butter Chicken</h3>
+          <p>A rich and creamy delight bursting with authentic flavors.</p>
+        </div>
+        <div class="card">
+          <img src="https://imgs.search.brave.com/qRYnDEWHazWz6Z2J46seYpyg36L1E4bdlIUHDQxutso/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJhY2Nlc3Mu/Y29tL2Z1bGwvMzky/Njk0Ni5qcGc" alt="Paneer Tikka">
+          <h3>Paneer Tikka</h3>
+          <p>Succulent paneer marinated in spices and grilled to perfection.</p>
+        </div>
+        <div class="card">
+          <img src="https://imgs.search.brave.com/Cy0gjo19kAZmmTYQf0QVz1kAg1-xU0EBCvlGm7GI_U8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTcz/Mjk2MzAwL3Bob3Rv/L3N1Z2FyLXN5cnVw/LWJlaW5nLXBvdXJl/ZC1vbi1ndWxhYi1q/YW11bnMtaW4tYS1i/b3dsLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1mUG5LN1pW/RXFFZmE2OVNrcHNj/aS0tMjZ1cVdZQkJi/MEJkek5RWk8xNktV/PQ" alt="Gulab Jamun">
+          <h3>Gulab Jamun</h3>
+          <p>Sweet, soft dumplings soaked in fragrant sugar syrup.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-nav">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="https://maps.google.com" target="_blank">Location</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Our Specialties</h3>
+          <ul class="footer-nav">
+            <li>North Indian</li>
+            <li>South Indian</li>
+            <li>Mughlai</li>
+            <li>Bengali</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Hours</h3>
+          <ul class="footer-nav">
+            <li>Monday - Friday: 11am - 10pm</li>
+            <li>Saturday: 10am - 11pm</li>
+            <li>Sunday: 10am - 9pm</li>
+            <li>Happy Hour: 4pm - 6pm Daily</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025  <img src="https://see.fontimg.com/api/rf5/BXew/MDExYmNmNmUwMWFiNDIxMThmODFlZWQ4MTU5N2YxOTQudHRm/U3dhZCBJbmRpYQ/samarkan-oblique.png?r=fs&h=30&w=2000&fg=000000&bg=FFFFFF&tb=1&s=15" alt> All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slider .slide');
+      let currentSlide = 0;
+      setInterval(function() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, 3000); // Change slide every 3 seconds
+    });
+  </script>
+</body>
+</html>
