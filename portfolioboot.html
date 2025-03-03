@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vikas Kumar - Portfolio</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Custom styles to mimic your original design aesthetic */
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .header-custom {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      padding: 3rem 0;
+    }
+    
+    .section-custom {
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .section-custom:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .section-title {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .skill-badge {
+      background-color: #3498db;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    
+    .skill-badge:hover {
+      background-color: #2980b9 !important;
+      transform: scale(1.05);
+    }
+    
+    .project-card {
+      transition: transform 0.3s ease;
+      background-color: #f8f9fa;
+    }
+    
+    .project-card:hover {
+      transform: scale(1.02);
+      background-color: #e2e6ea;
+    }
+    
+    .contact-link {
+      color: #3498db;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-link:hover {
+      color: #1d6fa5;
+    }
+    
+    /* Simple Carousel Custom Styles */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 5%;
+      background-color: rgba(52, 152, 219, 0.2);
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .carousel-indicators {
+      bottom: -30px;
+    }
+    
+    .carousel-indicators button {
+      background-color: #3498db;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    .skills-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header-custom text-white text-center shadow">
+    <div class="container">
+      <h1 class="display-4">Vikas Kumar</h1>
+      <p class="lead">Full Stack Developer</p>
+    </div>
+  </header>
+
+  <div class="container py-5">
+    <!-- About Me -->
+    <section id="about" class="section-custom bg-white p-4 mb-4 shadow-sm">
+      <h2 class="section-title">About Me</h2>
+      <p>Hi, I am Vikas Kumar, a passionate developer with extensive experience in web development and programming. I specialize in creating modern, responsive, and efficient web applications that deliver exceptional user experiences.</p>
+    </section>
+
+    <!-- Skills with Simple Carousel -->
+    <section id="skills" class="section-custom bg-white p-4 mb-5 shadow-sm">
+      <h2 class="section-title">Skills</h2>
+      
+      <div id="skillsCarousel" class="carousel slide" data-bs-ride="carousel"  data-bs-interval="3000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#skillsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Frontend"></button>
+          <button type="button" data-bs-target="#skillsCarousel" data-bs-slide-to="1" aria-label="Backend"></button>
+          <button type="button" data-bs-target="#skillsCarousel" data-bs-slide-to="2" aria-label="Database"></button>
+        </div>
+        
+        <div class="carousel-inner">
+          <!-- Slide 1: Frontend -->
+          <div class="carousel-item active">
+            <h4 class="text-center my-3">Frontend Technologies</h4>
+            <div class="skills-group">
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">HTML5</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">CSS3</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">JavaScript</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">React.js</span>
+            </div>
+          </div>
+          
+          <!-- Slide 2: Backend -->
+          <div class="carousel-item">
+            <h4 class="text-center my-3">Backend Technologies</h4>
+            <div class="skills-group">
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">Node.js</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">Python</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">Flask</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">Django</span>
+            </div>
+          </div>
+          
+          <!-- Slide 3: Database -->
+          <div class="carousel-item">
+            <h4 class="text-center my-3">Database Technologies</h4>
+            <div class="skills-group">
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">MongoDB</span>
+              <span class="badge skill-badge rounded-pill px-3 py-2 fs-6">MySQL</span>
+            </div>
+          </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#skillsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#skillsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Projects / Work Experiences -->
+    <section id="projects" class="section-custom bg-white p-4 mb-4 shadow-sm">
+      <h2 class="section-title">Projects &amp; Work Experience</h2>
+      <div class="project-card card border-0 mb-3 p-3">
+        <div class="card-body">
+          <h3 class="card-title">
+            <a href="https://github.com/VikasKumarSuthari/Mech-AI" target="_blank" class="contact-link">
+              <i class="bi bi-code-square me-2"></i>Mech AI
+            </a>
+          </h3>
+          <p class="card-text">A project leveraging artificial intelligence to diagnose car issues and assist with troubleshooting in real-time.</p>
+        </div>
+      </div>
+      <!-- You can add more project cards following the same structure -->
+    </section>
+
+    <!-- Feedback / Achievements -->
+    <section id="achievements" class="section-custom bg-white p-4 mb-4 shadow-sm">
+      <h2 class="section-title">Feedback &amp; Achievements</h2>
+      <p>Received consistent praise from clients and mentors for my innovative solutions, attention to detail, and dedication to quality. Recognized for significant contributions in multiple web development projects.</p>
+    </section>
+
+    <!-- Education Profile -->
+    <section id="education" class="section-custom bg-white p-4 mb-4 shadow-sm">
+      <h2 class="section-title">Education</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card border-0 bg-light mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Bachelor's Degree in Computer Science</h5>
+              <h6 class="card-subtitle mb-2 text-muted">KMIT</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section id="contact" class="section-custom bg-white p-4 mb-4 shadow-sm">
+      <h2 class="section-title">Contact Information</h2>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-envelope-fill me-2 text-primary"></i>
+            <span>Email: </span>
+            <a href="mailto:vikaskumarsuthari@gmail.com" class="contact-link ms-2">vikaskumarsuthari@gmail.com</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-telephone-fill me-2 text-primary"></i>
+            <span>Phone: </span>
+            <a href="tel:+918639933624" class="contact-link ms-2">+91 8639933624</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-linkedin me-2 text-primary"></i>
+            <span>LinkedIn: </span>
+            <a href="https://linkedin.com/in/vikaskumar-suthari" target="_blank" class="contact-link ms-2">linkedin.com/in/vikaskumar-suthari</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-github me-2 text-primary"></i>
+            <span>GitHub: </span>
+            <a href="https://github.com/VikasKumarSuthari" target="_blank" class="contact-link ms-2">github.com/VikasKumarSuthari</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-4">
+    <div class="container">
+      <p class="mb-0">© 2025 Vikas Kumar. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Feedback Form</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body class="d-flex align-items-center py-4 bg-light" style="min-height: 100vh;">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card shadow">
+          <div class="card-header text-center bg-primary text-white">
+            <h2 class="mb-0">Feedback Form</h2>
+          </div>
+          <div class="card-body">
+            <form class="needs-validation" novalidate>
+
+              <!-- Name Field -->
+              <div class="mb-3">
+                <label class="form-label">Name <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-person"></i></span>
+                  <input type="text" class="form-control" placeholder="Your name" required>
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="mb-3">
+                <label class="form-label">Email <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                  <input type="email" class="form-control" placeholder="Your email address" required>
+                  <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+              </div>
+
+              <!-- Phone Field -->
+              <div class="mb-3">
+                <label class="form-label">Phone <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                  <input type="tel" class="form-control" placeholder="Your phone number" pattern="[0-9]{10}" required>
+                  <div class="invalid-feedback">Enter a valid 10-digit phone number.</div>
+                </div>
+              </div>
+
+              <!-- Rating Field -->
+              <div class="mb-3">
+                <label class="form-label">Rating <span class="text-danger">*</span></label>
+                <select class="form-select" required>
+                  <option value="" disabled selected>Select rating</option>
+                  <option value="1">1 - Very Dissatisfied</option>
+                  <option value="2">2 - Dissatisfied</option>
+                  <option value="3">3 - Neutral</option>
+                  <option value="4">4 - Satisfied</option>
+                  <option value="5">5 - Very Satisfied</option>
+                </select>
+                <div class="invalid-feedback">Please select a rating.</div>
+              </div>
+
+              <!-- Questions Field -->
+              <div class="mb-3">
+                <label class="form-label">Questions <span class="text-danger">*</span></label>
+                <textarea class="form-control" rows="3" placeholder="Your questions" required minlength="10"></textarea>
+                <div class="invalid-feedback">Minimum 10 characters required.</div>
+              </div>
+
+              <!-- Additional Comments Field -->
+              <div class="mb-3">
+                <label class="form-label">Additional Comments <span class="text-danger">*</span></label>
+                <textarea class="form-control" rows="3" placeholder="Your comments" required></textarea>
+                <div class="invalid-feedback">Please enter your comments.</div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="bi bi-send me-2"></i>Submit Feedback
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        <div class="text-center mt-3 text-muted">
+          <small>Thank you for your valuable feedback!</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (for validation) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap Validation (No Custom JS Needed) -->
+  <script>
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+  </script>
+
+</body>
+</html>
