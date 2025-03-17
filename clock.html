@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #fff;
+            text-align: center;
+        }
+
+        .date-display {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .clock-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .clock-face {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .hand {
+            position: absolute;
+            transform-origin: bottom center;
+            bottom: 50%;
+            left: 50%;
+            z-index: 5;
+            border-radius: 5px;
+        }
+
+        .hour-hand {
+            width: 7px;
+            height: 70px;
+            background: #fff;
+            transform: translateX(-50%);
+        }
+
+        .minute-hand {
+            width: 4px;
+            height: 100px;
+            background: #ddd;
+            transform: translateX(-50%);
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 110px;
+            background: #ff5555;
+            transform: translateX(-50%);
+        }
+
+        .digital-clock {
+            font-size: 24px;
+            font-weight: 400;
+            margin-top: 20px;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="date-display" id="date-display"></div>
+    
+    <div class="clock-container">
+        <div class="clock-face">
+            <div class="hand hour-hand" id="hour-hand"></div>
+            <div class="hand minute-hand" id="minute-hand"></div>
+            <div class="hand second-hand" id="second-hand"></div>
+            <div class="clock-center"></div>
+        </div>
+    </div>
+
+    <div class="digital-clock" id="digital-clock"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hourHand = document.getElementById('hour-hand');
+            const minuteHand = document.getElementById('minute-hand');
+            const secondHand = document.getElementById('second-hand');
+            const digitalClock = document.getElementById('digital-clock');
+            const dateDisplay = document.getElementById('date-display');
+
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                const milliseconds = now.getMilliseconds();
+
+                // Smooth movement of hands
+                const hourAngle = (hours % 12) * 30 + minutes * 0.5;
+                const minuteAngle = minutes * 6 + seconds * 0.1;
+                const secondAngle = seconds * 6 + milliseconds * 0.006;
+
+                hourHand.style.transform = `translateX(-50%) rotate(${hourAngle}deg)`;
+                minuteHand.style.transform = `translateX(-50%) rotate(${minuteAngle}deg)`;
+                secondHand.style.transform = `translateX(-50%) rotate(${secondAngle}deg)`;
+
+                // Digital clock display
+                const formattedHours = String(hours).padStart(2, '0');
+                const formattedMinutes = String(minutes).padStart(2, '0');
+                const formattedSeconds = String(seconds).padStart(2, '0');
+                digitalClock.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+                // Date display
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                dateDisplay.textContent = now.toLocaleDateString(undefined, options);
+
+                requestAnimationFrame(updateClock);
+            }
+
+            updateClock();
+        });
+    </script>
+</body>
+</html>
